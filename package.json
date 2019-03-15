@@ -14,9 +14,7 @@
     "build:rollup": "rollup --config",
     "build:storybook": "build-storybook --output-dir build",
     "format": "prettier --write",
-    "lint:js": "eslint --fix",
-    "lint:css": "stylelint --fix",
-    "lint:scss": "stylelint --fix --syntax scss"
+    "lint": "eslint --fix"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
@@ -39,8 +37,6 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
-    "@samuelmeuli/eslint-config": "~1.1.0",
-    "@samuelmeuli/stylelint-config": "~1.0.0",
     "@storybook/react": "^5.1.0-alpha.6",
     "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.5",
@@ -73,17 +69,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "yarn lint:js",
-      "yarn format",
-      "git add"
-    ],
-    "*.css": [
-      "yarn lint:css",
-      "yarn format",
-      "git add"
-    ],
-    "*.scss": [
-      "yarn lint:scss",
+      "yarn lint",
       "yarn format",
       "git add"
     ],

@@ -8,7 +8,7 @@ import VuePlugin from 'rollup-plugin-vue';
 import pkg from './package.json';
 
 export default {
-  input: 'src/main.js',
+  input: 'src/main.jsx',
   output: [
     {
       file: pkg.main,

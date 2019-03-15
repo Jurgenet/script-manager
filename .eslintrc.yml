@@ -2,7 +2,6 @@ root: true
 
 extends:
   - airbnb
-  - "@samuelmeuli/eslint-config/react"
   - prettier
 
 env:
@@ -13,6 +12,6 @@ rules:
   import/no-extraneous-dependencies:
     - error
     - devDependencies:
-        - "rollup.config.js"
-        - ".storybook/**/*.js"
-        - "stories/**/*.js"
+        - 'rollup.config.js'
+        - '.storybook/**/*.js'
+        - 'stories/**/*.js'
