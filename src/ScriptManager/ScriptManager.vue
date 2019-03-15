@@ -3,6 +3,8 @@
 
   div(class=rootClass)
     div(class=`${rootClass}__title`) {{ title }}
+    div Owner: {{ initProps.sender }}
+    button(@click="handleSubmit") Submit
 </template>
 
 <script>
@@ -14,8 +16,25 @@ export default {
 
   store,
 
+  props: {
+    initProps: {
+      sender: String,
+    },
+    onSubmit: {
+      type: Function,
+      required: false,
+      default: () => {},
+    },
+  },
+
   computed: {
     ...mapState(['title']),
+  },
+
+  methods: {
+    handleSubmit() {
+      this.onSubmit({ msg: 'something needful' });
+    },
   },
 };
 </script>
