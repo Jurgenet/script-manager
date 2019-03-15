@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ScriptManager from './ScriptManager';
