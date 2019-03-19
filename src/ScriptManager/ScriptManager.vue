@@ -2,19 +2,37 @@
   - var rootClass = "script-manager"
 
   div(class=rootClass)
-    div(class=`${rootClass}__title`) {{ title }}
-    div Owner: {{ initProps.sender }}
-    button(@click="handleSubmit") Submit
+    div(
+      class=`${rootClass}__script-passing`
+      key="script-passing"
+      v-if="isScriptSelected"
+    )
+      ScriptPassing(
+        :script="selectedScript"
+        @cancel="handleScriptCancel"
+      )
+    div(
+      class=`${rootClass}__script-selection`
+      key="script-selection"
+      v-else
+    )
+      ScriptSelection(
+        :scripts="scripts"
+        @select="handleScriptSelect"
+      )
 </template>
 
 <script>
 import store from './store';
-import { mapState } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+
+import ScriptSelection from '@/containers/ScriptSelection.vue';
+import ScriptPassing from '@/containers/ScriptPassing.vue';
 
 export default {
   name: 'ScriptManager',
-
   store,
+  components: { ScriptSelection, ScriptPassing },
 
   props: {
     initProps: {
@@ -27,12 +45,40 @@ export default {
     },
   },
 
+  data: () => ({}),
+
   computed: {
-    ...mapState(['title']),
+    ...mapGetters({
+      scripts: 'Base/scripts',
+      selectedScript: 'Base/selectedScript',
+      isScriptSelected: 'Base/isScriptSelected',
+    }),
+  },
+
+  created() {
+    this.init();
   },
 
   methods: {
+    ...mapActions({
+      init: 'Base/init',
+      setPassingScriptId: 'Base/setPassingScriptId',
+    }),
+
+    handleSelectTab({ tabName }) {
+      alert(tabName);
+    },
+
+    handleScriptCancel() {
+      this.setPassingScriptId({ scriptId: null });
+    },
+
+    handleScriptSelect({ scriptId }) {
+      this.setPassingScriptId({ scriptId });
+    },
+
     handleSubmit() {
+      alert('event');
       this.onSubmit({ msg: 'something needful' });
     },
   },
@@ -41,7 +87,9 @@ export default {
 
 <style lang="scss">
 .script-manager {
-  font-size: 24px;
+  &__script-selection {
+    padding: 0 42px 0 44px;
+  }
 }
 </style>
 
